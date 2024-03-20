@@ -8,6 +8,8 @@ import org.springframework.context.annotation.Import;
 
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 @DataJpaTest
 @Import(BoardNativeRepository.class)
 public class BoardNativeRepositoryTest {
@@ -15,6 +17,18 @@ public class BoardNativeRepositoryTest {
     @Autowired
     private BoardNativeRepository boardNativeRepository;
 
+    @Test
+    public void deleteById_test(){
+        // given
+        int id = 1;
+
+        // when
+        boardNativeRepository.deleteById(id);
+
+        // then
+        List<Board> boardList = boardNativeRepository.findAll();
+        assertThat(boardList.size()).isEqualTo(3);
+    }
     @Test
     public void updateById_test(){
         int id = 1;

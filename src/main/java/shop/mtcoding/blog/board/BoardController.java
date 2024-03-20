@@ -17,6 +17,11 @@ public class BoardController {
     private final BoardNativeRepository boardNativeRepository;
     private final HttpSession session;
 
+    @PostMapping("/board/{id}/delete")
+    public String delete(@PathVariable int id){
+        boardNativeRepository.deleteById(id);
+        return "redirect:/";
+    }
     @GetMapping("/board/{id}/update-form")
     public String updateForm(@PathVariable Integer id, HttpServletRequest request) {
         Board board = boardNativeRepository.findById(id);
